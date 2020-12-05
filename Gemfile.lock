@@ -1,43 +1,47 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    configuration (1.2.0)
-    diff-lcs (1.1.2)
-    fattr (2.2.0)
-    fuubar (0.0.3)
-      rspec (~> 2.0)
-      rspec-instafail (~> 0.1.4)
-      ruby-progressbar (~> 0.0.9)
-    heroku (1.20.1)
-      launchy (~> 0.3.2)
-      rest-client (< 1.7.0, >= 1.4.0)
-    infinity_test (1.0.2)
+    diff-lcs (1.4.4)
+    erubis (2.7.0)
+    excon (0.78.1)
+    fuubar (2.5.0)
+      rspec-core (~> 3.0)
+      ruby-progressbar (~> 1.4)
+    heroics (0.1.1)
+      erubis (~> 2.0)
+      excon
+      moneta
+      multi_json (>= 1.9.2)
+    infinity_test (1.0.3)
       notifiers (>= 1.1.0)
       watchr (>= 0.7)
-    launchy (0.3.7)
-      configuration (>= 0.0.5)
-      rake (>= 0.8.1)
-    mime-types (1.16)
-    mocha (0.9.12)
-    notifiers (1.1.0)
-    rake (0.8.7)
-    rest-client (1.6.1)
-      mime-types (>= 1.16)
-    rspec (2.5.0)
-      rspec-core (~> 2.5.0)
-      rspec-expectations (~> 2.5.0)
-      rspec-mocks (~> 2.5.0)
-    rspec-core (2.5.1)
-    rspec-expectations (2.5.0)
-      diff-lcs (~> 1.1.2)
-    rspec-instafail (0.1.6)
-    rspec-mocks (2.5.0)
-    ruby-progressbar (0.0.9)
-    rush (0.6.7)
+    mocha (1.11.2)
+    moneta (1.0.0)
+    multi_json (1.15.0)
+    notifiers (1.2.2)
+    platform-api (3.2.0)
+      heroics (~> 0.1.1)
+      moneta (~> 1.0.0)
+      rate_throttle_client (~> 0.1.0)
+    rate_throttle_client (0.1.2)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
+    rspec-core (3.10.0)
+      rspec-support (~> 3.10.0)
+    rspec-expectations (3.10.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-mocks (3.10.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-support (3.10.0)
+    ruby-progressbar (1.10.1)
+    rush (0.6.8)
       session
-    session (3.1.0)
-      fattr
-    timecop (0.3.5)
+    session (3.2.0)
+    timecop (0.9.2)
     watchr (0.7)
 
 PLATFORMS
@@ -45,9 +49,12 @@ PLATFORMS
 
 DEPENDENCIES
   fuubar
-  heroku
   infinity_test
   mocha
+  platform-api
   rspec
   rush
   timecop
+
+BUNDLED WITH
+   2.1.4

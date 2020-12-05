@@ -47,8 +47,8 @@ module HireFire
         base.class_eval do
           set_callback :create, :after, Proc.new { |job| job.class.hirefire_hire }
           set_callback :destroy, :after, Proc.new { |job| job.class.environment.fire }
-          set_callback :update, :after, :unless => Proc.new { |job| job.failed_at.nil? },
-            Proc.new { |job| job.class.environment.fire }
+          set_callback :update, :after, Proc.new { |job| job.class.environment.fire },
+            :unless => Proc.new { |job| job.failed_at.nil? }
         end
       elsif base.name == "Delayed::Backend::DataMapper::Job"
         base.send :extend, HireFire::Environment::DelayedJob::ClassMethods
