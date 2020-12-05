@@ -34,13 +34,25 @@ module HireFire
       ##
       # Only implement these hooks for Delayed::Job backends
       if base.name =~ /Delayed::Backend::(ActiveRecord|Mongoid)::Job/
-        base.send :extend, HireFire::Environment::DelayedJob::ClassMethods
+        # base.send :extend, HireFire::Environment::DelayedJob::ClassMethods
+        #
+        # base.class_eval do
+        #   after_create  'self.class.hirefire_hire'
+        #   after_destroy 'self.class.environment.fire'
+        #   after_update  'self.class.environment.fire',
+        #     :unless => Proc.new { |job| job.failed_at.nil? }
+        # end
 
         base.class_eval do
-          after_create  'self.class.hirefire_hire'
-          after_destroy 'self.class.environment.fire'
-          after_update  'self.class.environment.fire',
-            :unless => Proc.new { |job| job.failed_at.nil? }
+          after :create do
+            self.class.hirefire_hire
+          end
+          after :destroy do
+            self.class.environment.fire
+          end
+          after :update do
+            self.class.environment.fire unless self.failed_at.nil?
+          end
         end
       elsif base.name == "Delayed::Backend::DataMapper::Job"
         base.send :extend, HireFire::Environment::DelayedJob::ClassMethods
