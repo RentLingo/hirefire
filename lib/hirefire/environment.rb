@@ -34,7 +34,7 @@ module HireFire
       ##
       # Only implement these hooks for Delayed::Job backends
       if base.name =~ /Delayed::Backend::(ActiveRecord|Mongoid)::Job/
-        # base.send :extend, HireFire::Environment::DelayedJob::ClassMethods
+        base.send :extend, HireFire::Environment::DelayedJob::ClassMethods
         #
         # base.class_eval do
         #   after_create  'self.class.hirefire_hire'
